@@ -6,3 +6,4 @@ $lang['reports_free'] = 'Free';
 $lang['reports_cached'] = 'Cached';
 $lang['reports_buffers'] = 'Buffers';
 $lang['reports_kernel_and_applications'] = 'Kernel and Applications';
+$lang['reports_memory_information'] = 'Memory Information';
