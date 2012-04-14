@@ -1,9 +1,9 @@
 
 Name: app-reports
 Epoch: 1
-Version: 1.0.16
+Version: 1.1.0
 Release: 1%{dist}
-Summary: Base Reports - APIs and install
+Summary: Base Reports - Core
 License: LGPLv3
 Group: ClearOS/Libraries
 Source: app-reports-%{version}.tar.gz
@@ -13,7 +13,7 @@ Buildarch: noarch
 The Base Reports app provides a set of standard reports for the operating system.
 
 %package core
-Summary: Base Reports - APIs and install
+Summary: Base Reports - Core
 Requires: app-base-core
 
 %description core
