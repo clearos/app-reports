@@ -1,7 +1,7 @@
 
 Name: app-reports
 Epoch: 1
-Version: 1.1.0
+Version: 1.2.0
 Release: 1%{dist}
 Summary: Base Reports - Core
 License: LGPLv3
@@ -10,14 +10,15 @@ Source: app-reports-%{version}.tar.gz
 Buildarch: noarch
 
 %description
-The Base Reports app provides a set of standard reports for the operating system.
+The Base Reports app provides a set of standard report tools for the operating system.
 
 %package core
 Summary: Base Reports - Core
 Requires: app-base-core
+Requires: app-system-database-core
 
 %description core
-The Base Reports app provides a set of standard reports for the operating system.
+The Base Reports app provides a set of standard report tools for the operating system.
 
 This package provides the core API and libraries.
 

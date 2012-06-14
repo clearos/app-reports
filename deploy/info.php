@@ -5,7 +5,7 @@
 /////////////////////////////////////////////////////////////////////////////
 
 $app['basename'] = 'reports';
-$app['version'] = '1.1.0';
+$app['version'] = '1.2.0';
 $app['release'] = '1';
 $app['vendor'] = 'ClearFoundation';
 $app['packager'] = 'ClearFoundation';
@@ -22,4 +22,12 @@ $app['category'] = lang('base_category_system');
 $app['subcategory'] = lang('base_subcategory_settings');
 $app['menu_enabled'] = FALSE;
 
+/////////////////////////////////////////////////////////////////////////////
+// Packaging
+/////////////////////////////////////////////////////////////////////////////
+
 $app['core_only'] = TRUE;
+
+$app['core_requires'] = array(
+    'app-system-database-core',
+);
