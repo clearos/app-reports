@@ -16,6 +16,7 @@ The Base Reports app provides a set of standard report tools for the operating s
 Summary: Base Reports - Core
 Requires: app-base-core
 Requires: app-system-database-core
+Requires: theme-default >= 6.3.3
 
 %description core
 The Base Reports app provides a set of standard report tools for the operating system.

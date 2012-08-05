@@ -30,4 +30,5 @@ $app['core_only'] = TRUE;
 
 $app['core_requires'] = array(
     'app-system-database-core',
+    'theme-default >= 6.3.3',
 );
