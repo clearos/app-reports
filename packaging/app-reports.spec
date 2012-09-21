@@ -1,7 +1,7 @@
 
 Name: app-reports
 Epoch: 1
-Version: 1.2.0
+Version: 1.2.1
 Release: 1%{dist}
 Summary: Base Reports - Core
 License: LGPLv3
@@ -15,7 +15,6 @@ The Base Reports app provides a set of standard report tools for the operating s
 %package core
 Summary: Base Reports - Core
 Requires: app-base-core
-Requires: app-system-database-core
 Requires: theme-default >= 6.3.3
 
 %description core

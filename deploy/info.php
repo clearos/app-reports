@@ -5,7 +5,7 @@
 /////////////////////////////////////////////////////////////////////////////
 
 $app['basename'] = 'reports';
-$app['version'] = '1.2.0';
+$app['version'] = '1.2.1';
 $app['release'] = '1';
 $app['vendor'] = 'ClearFoundation';
 $app['packager'] = 'ClearFoundation';
@@ -29,6 +29,5 @@ $app['menu_enabled'] = FALSE;
 $app['core_only'] = TRUE;
 
 $app['core_requires'] = array(
-    'app-system-database-core',
     'theme-default >= 6.3.3',
 );
