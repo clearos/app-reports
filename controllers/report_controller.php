@@ -74,14 +74,14 @@ class Report_Controller extends ClearOS_Controller
     {
         $this->load->library('reports/Report');
 
-        return $this->report->get_summary_range();
+        return $this->report->get_date_range();
     }
 
     function _get_summary_ranges()
     {
         $this->load->library('reports/Report');
 
-        return $this->report->get_summary_ranges();
+        return $this->report->get_date_ranges();
     }
 
     /**

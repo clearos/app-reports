@@ -67,27 +67,6 @@ $(document).ready(function() {
 
     lang_received = '<?php echo lang("proxy_report_received"); ?>';
 
-    // Main
-    //-----
-/*
-clearos_report_domains = 1234
-clearos_report_domains_app_name = 'proxy_report'
-clearos_report_domains_report = 'ips'
-
-        <input type='hidden' id='report_chart_id' value='proxy_report_domains'>
-        <input type='hidden' id='report_app_name' value='proxy_report'>
-        <input type='hidden' id='report_name' value='ips'>
-    
-        <input type='hidden' id='report_chart_id' value='proxy_report_ips'>
-        <input type='hidden' id='report_app_name' value='proxy_report'>
-        <input type='hidden' id='report_name' value='ips'>
-
-// search for all ids starting with clearos_reports
-// basename = preg.... 
-// 
-
-*/
-
     // Date range form action
     //-----------------------
 
@@ -104,10 +83,10 @@ clearos_report_domains_report = 'ips'
         var id_prefix = $(value).val();
 
         var app = $("#" + id_prefix + "_app_name").val();
-        var report = $("#" + id_prefix + "_report_name").val();
-        var chart_id = id_prefix + "_chart";
+        var report_name = $("#" + id_prefix + "_report_name").val();
+        var report_id = id_prefix;
 
-        generate_report(app, report, chart_id);
+        generate_report(app, report_name, report_id);
     });
 });
 
@@ -115,36 +94,53 @@ clearos_report_domains_report = 'ips'
  * Ajax call for standard report.
  */
 
-function generate_report(app, report, chart_id) {
+function generate_report(app, report_name, report_id) {
 
     $.ajax({
-        url: '/app/' + app + '/' + report + '/get_data',
+        url: '/app/' + app + '/' + report_name + '/get_data',
         method: 'GET',
         dataType: 'json',
         success : function(payload) {
-            create_pie_chart(payload, chart_id);
+            var header = payload.header;
+            var type = payload.type;
+            var data = payload.data;
+
+            create_chart(header, type, data, report_id);
+            create_table(header, type, data, report_id);
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
-            window.setTimeout(generate_report, 3000);
+            // FIXME window.setTimeout(generate_report, 3000);
         }
     });
 }
 
 /**
- * Generates dashboard report.
+ * Creates chart.
  */
 
-function create_pie_chart(payload, chart_id) {
+function create_chart(header, type, data, report_id) {
+    var chart_id = report_id + '_chart';
+    var chart_data = Array();
 
-    hits = Array();
+    // Put the data into key/value pairs - required by jqplot
+    // - Convert IP addresses
+    // - Select the x and y axes
+    //-------------------------------------------------------
 
-    for (var details in payload) {
-        if (payload.hasOwnProperty(details)) {
-            hits.push([payload[details].hits, details]);
-        }
-    }
+    for (i = 0; i < data.length; i++) {
 
-    var chart = jQuery.jqplot (chart_id, [hits],
+        if (type[0] == 'ip')
+            x_item = long2ip(data[i][0]);
+        else
+            x_item = data[i][0];
+
+        chart_data.unshift([data[i][1], x_item]);
+    } 
+
+    // Pump the data into jqplot call
+    //-------------------------------
+
+    var chart = jQuery.jqplot (chart_id, [chart_data],
     {
         animate: !$.jqplot.use_excanvas,
         seriesDefaults: {
@@ -161,7 +157,51 @@ function create_pie_chart(payload, chart_id) {
         }
     });
 
+    // Draw the chart
+    //---------------
+
     chart.redraw();
+}
+
+/**
+ * Creates data table.
+ */
+
+function create_table(header, type, data, report_id) {
+    var table = $('#' + report_id + '_table').dataTable();
+
+    table.fnClearTable();
+
+    for (i = 0; i < data.length; i++) {
+        var row = Array();
+
+        for (j = 0; j < data[i].length; j++) {
+            if (type[j] == 'ip')
+                item = '<span style="display: none">' + data[i][j] + '</span>' + long2ip(data[i][j]);
+            else
+                item = data[i][j];
+
+            row.push(item);
+        }
+
+        table.fnAddData(row);
+    }
+}
+
+/**
+ * Returns IP address in human-readable format.
+ */
+
+// TODO: Not IPv6 friendly
+function long2ip(ip_long) {
+    var ip = ip_long%256;
+
+    for (var i = 3; i > 0; i--) { 
+        ip_long = Math.floor(ip_long/256);
+        ip = ip_long%256 + '.' + ip;
+    }
+
+    return ip;
 }
 
 // vim: ts=4 syntax=javascript

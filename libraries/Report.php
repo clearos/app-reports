@@ -90,17 +90,17 @@ class Report extends Engine
     // C O N S T A N T S
     ///////////////////////////////////////////////////////////////////////////////
 
-    const SUMMARY_RANGE_TODAY = 'today';
-    const SUMMARY_RANGE_YESTERDAY = 'yesterday';
-    const SUMMARY_RANGE_LAST_7_DAYS = 'last7';
-    const SUMMARY_RANGE_LAST_30_DAYS = 'last30';
+    const RANGE_TODAY = 'today';
+    const RANGE_YESTERDAY = 'yesterday';
+    const RANGE_LAST_7_DAYS = 'last7';
+    const RANGE_LAST_30_DAYS = 'last30';
 
-    const DETAIL_RANGE_DAILY = 'daily';
-    const DETAIL_RANGE_WEEKLY = 'weekly';
-    const DETAIL_RANGE_MONTHLY = 'monthly';
+    const INTERVAL_HOURLY = 'hourly';
+    const INTERVAL_DAILY = 'daily';
+    const INTERVAL_WEEKLY = 'weekly';
+    const INTERVAL_MONTHLY = 'monthly';
 
-    const DEFAULT_SUMMARY_RANGE = 'today';
-    const DEFAULT_DETAIL_RANGE = 'daily';
+    const DEFAULT_RANGE = 'today';
 
     const FILE_CONFIG = '/etc/clearos/reports.conf';
 
@@ -109,7 +109,8 @@ class Report extends Engine
     ///////////////////////////////////////////////////////////////////////////////
 
     protected $config = NULL;
-    protected $summary_ranges = array();
+    protected $month_names = array();
+    protected $ranges = array();
 
     ///////////////////////////////////////////////////////////////////////////////
     // M E T H O D S
@@ -123,40 +124,55 @@ class Report extends Engine
     {
         clearos_profile(__METHOD__, __LINE__);
 
-        $this->summary_ranges = array(
-            self::SUMMARY_RANGE_TODAY => lang('reports_today'),
-            self::SUMMARY_RANGE_YESTERDAY => lang('reports_yesterday'),
-            self::SUMMARY_RANGE_LAST_7_DAYS => lang('reports_last_7_days'),
-            self::SUMMARY_RANGE_LAST_30_DAYS => lang('reports_last_30_days')
+        $this->ranges = array(
+            self::RANGE_TODAY => lang('reports_today'),
+            self::RANGE_YESTERDAY => lang('reports_yesterday'),
+            self::RANGE_LAST_7_DAYS => lang('reports_last_7_days'),
+            self::RANGE_LAST_30_DAYS => lang('reports_last_30_days')
+        );
+
+        $this->month_names = array(
+            '1' => lang('base_month_january'),
+            '2' => lang('base_month_february'),
+            '3' => lang('base_month_march'),
+            '4' => lang('base_month_april'),
+            '5' => lang('base_month_may'),
+            '6' => lang('base_month_june'),
+            '7' => lang('base_month_july'),
+            '8' => lang('base_month_august'),
+            '9' => lang('base_month_september'),
+            '10' => lang('base_month_october'),
+            '11' => lang('base_month_november'),
+            '12' => lang('base_month_december')
         );
     }
 
     /**
-     * Returns summary range.
+     * Returns date range.
      *
      * @return string summary range
      */
 
-    public function get_summary_range()
+    public function get_date_range()
     {
         clearos_profile(__METHOD__, __LINE__);
 
         $this->_load_config();
 
-        return $this->config['summary_range'];
+        return $this->config['range'];
     }
 
     /**
-     * Returns summary ranges.
+     * Returns built-in date ranges.
      *
      * @return array summary ranges
      */
 
-    public function get_summary_ranges()
+    public function get_date_ranges()
     {
         clearos_profile(__METHOD__, __LINE__);
 
-        return $this->summary_ranges;
+        return $this->ranges;
     }
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -164,14 +180,14 @@ class Report extends Engine
     ///////////////////////////////////////////////////////////////////////////////
 
     /**
-     * Validation routine for summary ranges.
+     * Validation routine for date ranges.
      *
-     * @param string $range summary range
+     * @param string $range date range
      *
-     * @return string error message if summary range is invalid
+     * @return string error message if date range is invalid
      */
 
-    public function validate_summary_range($range)
+    public function validate_date_range($range)
     {
         clearos_profile(__METHOD__, __LINE__);
 
@@ -203,6 +219,6 @@ class Report extends Engine
         }
 
         if (empty($this->config['summary_range']))
-            $this->config['summary_range'] = self::DEFAULT_SUMMARY_RANGE;
+            $this->config['summary_range'] = self::DEFAULT_RANGE;
     }
 }
