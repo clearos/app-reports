@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Reports engine controller.
+ * Reports engine core controller.
  *
  * @category   Apps
  * @package    Reports
@@ -45,19 +45,19 @@
  * @link       http://www.clearfoundation.com/docs/developer/apps/reports/
  */
 
-class Report_Controller extends ClearOS_Controller
+class Report_Engine_Controller extends ClearOS_Controller
 {
     /**
-     * Reports engine constructor.
+     * Reports engine core constructor.
      *
-     * @param string $app_name app that manages the report
+     * @param string $report report details
      *
      * @return view
      */
 
-    function __construct($app_name)
+    function __construct($report)
     {
-        $this->app_name = $app_name;
+        $this->report_info = $report;
     }
 
     /**
@@ -66,8 +66,19 @@ class Report_Controller extends ClearOS_Controller
      * @return view
      */
 
-    function index()
+    function _index($type, $driver)
     {
+        $options['javascript'] = array(clearos_app_htdocs($driver) . '/reports.js.php');
+
+        // FIXME: review
+        if ($type === 'dashboard') {
+            $view = 'reports/dashboard_report';
+        } else {
+            $view = 'reports/full_report';
+            $options['type'] = MY_Page::TYPE_REPORT;
+        }
+
+        $this->page->view_form($view, $this->report_info, $report['title'], $options);
     }
 
     function _get_summary_range()
@@ -98,5 +109,38 @@ class Report_Controller extends ClearOS_Controller
         if (!$this->session->userdata('report_sr'))
             $this->session->set_userdata('reports_sr', 'today');
 */
+    }
+
+    function get_data()
+    {
+        clearos_profile(__METHOD__, __LINE__);
+
+        // Load dependencies
+        //------------------
+
+        $this->load->library($this->report_info['app'] . '/' . $this->report_info['library']);
+
+        // Load data
+        //----------
+
+        try {
+            $library = strtolower($this->report_info['library']);
+            $method = $this->report_info['method'];
+
+            $data = $this->$library->$method(
+                $this->session->userdata('report_sr'),
+                10
+            );
+        } catch (Exception $e) {
+            echo json_encode(array('code' => clearos_exception_code($e), 'errmsg' => clearos_exception_message($e)));
+        }
+
+        // Show data
+        //----------
+
+        header('Cache-Control: no-cache, must-revalidate');
+        header('Expires: Fri, 01 Jan 2010 05:00:00 GMT');
+        header('Content-type: application/json');
+        echo json_encode($data);
     }
 }

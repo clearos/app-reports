@@ -127,8 +127,10 @@ function create_chart(header, type, data, report_id) {
     // - Select the x and y axes
     //-------------------------------------------------------
 
-    for (i = 0; i < data.length; i++) {
+    // FIXME: hard coded 10
+    var length = (data.length > 10) ? 10 : data.length;
 
+    for (i = 0; i < length; i++) {
         if (type[0] == 'ip')
             x_item = long2ip(data[i][0]);
         else

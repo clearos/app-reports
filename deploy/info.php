@@ -18,7 +18,7 @@ $app['description'] = lang('reports_app_description');
 /////////////////////////////////////////////////////////////////////////////
 
 $app['name'] = lang('reports_app_name');
-$app['category'] = lang('base_category_system');
+$app['category'] = lang('base_category_reports');
 $app['subcategory'] = lang('base_subcategory_settings');
 $app['menu_enabled'] = FALSE;
 
@@ -27,5 +27,7 @@ $app['menu_enabled'] = FALSE;
 /////////////////////////////////////////////////////////////////////////////
 
 $app['core_requires'] = array(
-    'theme-default >= 6.3.3',
+    'clearos-framework >= 6.3.4',
+    'system-report-driver',
+    'theme-default >= 6.3.9',
 );
