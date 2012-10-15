@@ -3,9 +3,8 @@
 /**
  * Report factory controller.
  *
- * The report system use the factory methodology, but not in the traditional
- * kind of way.  We use a simple if statement to load one of the report 
- * drivers.  Doing it this way makes it CodeIgniter friendly.
+ * The report system use the factory methodology, but implemented in a
+ * CodeIgniter frendly way.
  *
  * @category   Apps
  * @package    Reports
@@ -33,11 +32,6 @@
 //
 ///////////////////////////////////////////////////////////////////////////////
 
-///////////////////////////////////////////////////////////////////////////////
-// D E P E N D E N C I E S
-///////////////////////////////////////////////////////////////////////////////
+$reports_driver = clearos_driver('reports');
 
-if (clearos_app_installed('advanced_reports_FIXME'))
-    require_once clearos_app_base('advanced_reports') . '/controllers/report_controller.php';
-else
-    require_once clearos_app_base('home_reports') . '/controllers/report_controller.php';
+require_once clearos_app_base($reports_driver) . '/controllers/report_controller.php';

@@ -61,55 +61,10 @@ class Report_Engine_Controller extends ClearOS_Controller
     }
 
     /**
-     * Default controller.
+     * Returns raw data from a report.
      *
-     * @return view
+     * @return json array
      */
-
-    function _index($type, $driver)
-    {
-        $options['javascript'] = array(clearos_app_htdocs($driver) . '/reports.js.php');
-
-        // FIXME: review
-        if ($type === 'dashboard') {
-            $view = 'reports/dashboard_report';
-        } else {
-            $view = 'reports/full_report';
-            $options['type'] = MY_Page::TYPE_REPORT;
-        }
-
-        $this->page->view_form($view, $this->report_info, $report['title'], $options);
-    }
-
-    function _get_summary_range()
-    {
-        $this->load->library('reports/Report');
-
-        return $this->report->get_date_range();
-    }
-
-    function _get_summary_ranges()
-    {
-        $this->load->library('reports/Report');
-
-        return $this->report->get_date_ranges();
-    }
-
-    /**
-     * Date range handler.
-     */
-
-    function _handle_range()
-    {
-        if ($this->input->post('report_range'))
-            $this->session->set_userdata('report_sr', $this->input->post('report_range'));
-
-        // FIXME: hard-coded today
-/*
-        if (!$this->session->userdata('report_sr'))
-            $this->session->set_userdata('reports_sr', 'today');
-*/
-    }
 
     function get_data()
     {
