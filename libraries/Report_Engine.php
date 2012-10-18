@@ -106,4 +106,50 @@ class Report_Engine extends Engine
     {
         clearos_profile(__METHOD__, __LINE__);
     }
+
+    /**
+     * Returns report information for a given report.
+     *
+     * Every report class defines the details of a report via a hash 
+     * array.  Details include:
+     *
+     * - title
+     * - headers for the report data
+     * - data types for the report data
+     * - etc.
+     *
+     * @param string $report report name
+     *
+     * @return array report information
+     */
+
+    public function get_report_info($report)
+    {
+        clearos_profile(__METHOD__, __LINE__);
+
+        $definition = $this->_get_definition();
+
+        return $definition[$report];
+    }
+
+    /**
+     * Returns list of report URLs.
+     *
+     * @return array list of report URLs
+     * @throws Engine_Exception
+     */
+
+    public function get_report_urls()
+    {
+        clearos_profile(__METHOD__, __LINE__);
+
+        $reports = $this->_get_definition();
+
+        $urls = array();
+
+        foreach ($reports as $report => $details)
+            $urls['/app/' . $details['url']] = $details['title'];
+
+        return $urls;
+    }
 }

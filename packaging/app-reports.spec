@@ -1,7 +1,7 @@
 
 Name: app-reports
 Epoch: 1
-Version: 1.2.9
+Version: 1.4.0
 Release: 1%{dist}
 Summary: Base Reports
 License: GPLv3

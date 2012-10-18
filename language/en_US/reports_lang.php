@@ -16,3 +16,4 @@ $lang['reports_entries'] = 'Entries';
 $lang['reports_full_report'] = 'Full Report';
 $lang['reports_report_data'] = 'Report Data';
 $lang['reports_report_settings'] = 'Report Settings';
+$lang['reports_related_reports'] = 'Related Reports';

@@ -47,6 +47,16 @@
 
 class Report_Engine_Controller extends ClearOS_Controller
 {
+    ///////////////////////////////////////////////////////////////////////////////
+    // V A R I A B L E S
+    ///////////////////////////////////////////////////////////////////////////////
+
+    protected $report_info = array();
+
+    ///////////////////////////////////////////////////////////////////////////////
+    // M E T H O D S
+    ///////////////////////////////////////////////////////////////////////////////
+
     /**
      * Reports engine core constructor.
      *
@@ -55,47 +65,26 @@ class Report_Engine_Controller extends ClearOS_Controller
      * @return view
      */
 
-    function __construct($report)
+    function __construct($app, $library, $report)
     {
-        $this->report_info = $report;
-    }
+        // Load the report class
+        //----------------------
 
-    /**
-     * Returns raw data from a report.
-     *
-     * @return json array
-     */
+        $this->load->library($app . '/' . $library);
 
-    function get_data()
-    {
-        clearos_profile(__METHOD__, __LINE__);
-
-        // Load dependencies
-        //------------------
-
-        $this->load->library($this->report_info['app'] . '/' . $this->report_info['library']);
-
-        // Load data
-        //----------
+        // Load the report data using the standard report methods
+        //-------------------------------------------------------
 
         try {
-            $library = strtolower($this->report_info['library']);
-            $method = $this->report_info['method'];
+            $ci_library = strtolower($library);
 
-            $data = $this->$library->$method(
-                $this->session->userdata('report_sr'),
-                10
-            );
+            $report = $this->$ci_library->get_report_info($report);
+            $report['links'] = $this->$ci_library->get_report_urls();
         } catch (Exception $e) {
-            echo json_encode(array('code' => clearos_exception_code($e), 'errmsg' => clearos_exception_message($e)));
+            $this->page->view_exception($e);
+            return;
         }
 
-        // Show data
-        //----------
-
-        header('Cache-Control: no-cache, must-revalidate');
-        header('Expires: Fri, 01 Jan 2010 05:00:00 GMT');
-        header('Content-type: application/json');
-        echo json_encode($data);
+        $this->report_info = $report;
     }
 }
