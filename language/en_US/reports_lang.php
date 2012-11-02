@@ -12,3 +12,4 @@ $lang['reports_full_report'] = 'Full Report';
 $lang['reports_report_data'] = 'Report Data';
 $lang['reports_report_settings'] = 'Report Settings';
 $lang['reports_reports'] = 'Reports';
+$lang['reports_range_invalid'] = 'Range is invalid.';
