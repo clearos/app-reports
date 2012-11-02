@@ -88,12 +88,6 @@ class Report_Engine extends Engine
     const INTERVAL_WEEKLY = 'weekly';
     const INTERVAL_MONTHLY = 'monthly';
 
-    // FIXME: review
-    const DEFAULT_RANGE = 'today';
-
-    // FIXME: review
-    const FILE_CONFIG = '/etc/clearos/reports.conf';
-
     ///////////////////////////////////////////////////////////////////////////////
     // M E T H O D S
     ///////////////////////////////////////////////////////////////////////////////
@@ -119,37 +113,117 @@ class Report_Engine extends Engine
      * - etc.
      *
      * @param string $report report name
+     * @param string $key    key value for report (e.g. eth0)
      *
      * @return array report information
      */
 
-    public function get_report_info($report)
+    public function get_report_info($report, $key = NULL)
     {
         clearos_profile(__METHOD__, __LINE__);
 
-        $definition = $this->_get_definition();
+        $info = $this->_initialize_report_info();
 
-        return $definition[$report];
+        if (is_null($key))
+            return $info[$report];
+        else
+            return $info[$report][$key];
     }
 
     /**
-     * Returns list of report URLs.
+     * Initializes report information.
      *
-     * @return array list of report URLs
-     * @throws Engine_Exception
+     * The report definition in an app developer's report is slimmed
+     * down to keep it as simple as possible for the developer.
+     * We calculate some implied fields and set optional values.
+     *
+     * @return array report information
      */
 
-    public function get_report_urls()
+    protected function _initialize_report_info()
     {
         clearos_profile(__METHOD__, __LINE__);
 
-        $reports = $this->_get_definition();
+        $definitions = $this->_get_definition();
+
+        // Handy: get the class and app name
+        //----------------------------------
+
+        $full_class = get_class($this);
+        $matches = array();
+
+        preg_match('/clearos\\\apps\\\(.*)\\\(.*)/', $full_class, $matches);
+
+        $app = $matches[1];
+        $library = $matches[2];
+
+        // Loop through report definitions
+        // Manually the special "overview" report first
+        //---------------------------------------------
 
         $urls = array();
+        $dashboards = array();
+        $report_info = array();
 
-        foreach ($reports as $report => $details)
-            $urls['/app/' . $details['url']] = $details['title'];
+        $report_info['overview']['title'] = lang('base_overview');
+        $report_info['overview']['url'] = $app;
+        $urls['/app/' . $report_info['overview']['url']] = lang('base_overview');
 
-        return $urls;
+        foreach ($definitions as $report => $definition) {
+
+            // Non-intuitive.  There are two types of reports to handle:
+            // - A simple report (e.g. system load)
+            // - A bunch of reports based on a key value (e.g. eth0, eth1, for the network report)
+            //
+            // We do some things a bit differently depending on the type
+
+            // Set the report name
+            $report_name = (empty($definition['key_value'])) ? $report : $definition['key_value'];
+
+            // Pull in definition
+            $info = $definitions[$report_name];
+
+            // Add report name to the array for convenience
+            $info['report'] = $report_name;
+
+            // Add library info
+            $info['library'] = $library;
+
+            // Set basename
+            if (! isset($info['basename']))
+                $info['basename'] = $report_name;
+
+            // Set an empty key value if one is not defined
+            if (! isset($info['key_value']))
+                $info['key_value'] = '';
+
+            // Add URLs
+            if (empty($info['key_value']))
+                $info['url'] = $info['app'] . '/' . $info['basename'];
+            else
+                $info['url'] = $info['app'] . '/' . $info['basename'] . '/index/' . $info['key_value'];
+
+            // Track URLs and Dashboards
+            $urls['/app/' . $info['url']] = $info['title'];
+            $dashboards[$info['url']] = array(
+                'controller' =>  $info['app'] . '/' . $info['basename'],
+                'method' => 'dashboard',
+                'params' => $info['key_value']
+            );
+
+            $report_info[$report_name] = $info;
+        }
+
+        // Each report should also have URLs to the other reports, so
+        // Loop through again to add this information.
+        //-------------------------------------------------------------
+
+        foreach ($report_info as $report => $info)
+            $report_info[$report]['urls'] = $urls;
+
+        // And add dashboard info to special overview report
+        $report_info['overview']['dashboards'] = $dashboards;
+
+        return $report_info;
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Reports engine core controller.
+ * Reports engine controller.
  *
  * @category   Apps
  * @package    Reports
@@ -58,33 +58,15 @@ class Report_Engine_Controller extends ClearOS_Controller
     ///////////////////////////////////////////////////////////////////////////////
 
     /**
-     * Reports engine core constructor.
+     * Report engine controller constructor.
      *
-     * @param string $report report details
-     *
-     * @return view
+     * @param string $app     app name for the report
+     * @param string $library library for the report
      */
 
-    function __construct($app, $library, $report)
+    function __construct($app, $library)
     {
-        // Load the report class
-        //----------------------
-
-        $this->load->library($app . '/' . $library);
-
-        // Load the report data using the standard report methods
-        //-------------------------------------------------------
-
-        try {
-            $ci_library = strtolower($library);
-
-            $report = $this->$ci_library->get_report_info($report);
-            $report['links'] = $this->$ci_library->get_report_urls();
-        } catch (Exception $e) {
-            $this->page->view_exception($e);
-            return;
-        }
-
-        $this->report_info = $report;
+        $this->report_info['app'] = $app;
+        $this->report_info['library'] = $library;
     }
 }
