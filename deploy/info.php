@@ -27,6 +27,7 @@ $app['menu_enabled'] = FALSE;
 /////////////////////////////////////////////////////////////////////////////
 
 $app['core_requires'] = array(
+    'app-base-core >= 1:1.4.2',
     'clearos-framework >= 6.4.2',
     'system-report-driver',
     'theme-default >= 6.4.2',

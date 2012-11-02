@@ -19,6 +19,7 @@ Summary: Base Reports - Core
 License: LGPLv3
 Group: ClearOS/Libraries
 Requires: app-base-core
+Requires: app-base-core >= 1:1.4.2
 Requires: clearos-framework >= 6.4.2
 Requires: system-report-driver
 Requires: theme-default >= 6.4.2
