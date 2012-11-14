@@ -113,21 +113,37 @@ class Report_Engine extends Engine
      * - etc.
      *
      * @param string $report report name
-     * @param string $key    key value for report (e.g. eth0)
      *
      * @return array report information
      */
 
-    public function get_report_info($report, $key = NULL)
+    public function get_report_info($report)
     {
         clearos_profile(__METHOD__, __LINE__);
 
         $info = $this->_initialize_report_info();
 
-        if (is_null($key))
-            return $info[$report];
+        return $info[$report];
+    }
+
+    /**
+     * Checks to see if report exists.
+     *
+     * @param string $report report name
+     *
+     * @return boolean TRUE if report exists
+     */
+
+    public function report_exists($report)
+    {
+        clearos_profile(__METHOD__, __LINE__);
+
+        $info = $this->_initialize_report_info();
+
+        if (empty($info[$report]))
+            return FALSE;
         else
-            return $info[$report][$key];
+            return TRUE;
     }
 
     /**
@@ -203,6 +219,13 @@ class Report_Engine extends Engine
             else
                 $info['url'] = $info['app'] . '/' . $info['basename'] . '/index/' . $info['key_value'];
 
+            // Add default sort column if one is not specified
+            // - timeline charts are sorted by the time (column 0)
+            // - normal x/y are sorted by y (column 1)
+
+            if (empty($info['sort_column']))
+                $info['sort_column'] = (preg_match('/timeline/', $info['chart_type'])) ? 0 : 1;
+
             // Track URLs and Dashboards
             $urls['/app/' . $info['url']] = $info['title'];
             $dashboards[$info['url']] = array(
@@ -223,6 +246,7 @@ class Report_Engine extends Engine
 
         // And add dashboard info to special overview report
         $report_info['overview']['dashboards'] = $dashboards;
+        $report_info['overview']['report'] = 'overview';
 
         return $report_info;
     }
