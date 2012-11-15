@@ -147,6 +147,44 @@ class Report_Engine extends Engine
     }
 
     /**
+     * Returns report data information for a given report.
+     *
+     * Details include:
+     *
+     * - header
+     * - type (data types)
+     * - chart_series
+     *
+     * @param string $report report name
+     *
+     * @return array report information
+     */
+
+    public function _get_data_info($report)
+    {
+        clearos_profile(__METHOD__, __LINE__);
+
+        $info = $this->_initialize_report_info();
+
+        $report_data['header'] = $info[$report]['headers'];
+        $report_data['type'] = $info[$report]['types'];
+        $report_data['detail'] = $info[$report]['detail'];
+
+        if (isset($info[$report]['format']))
+            $report_data['format'] = $info[$report]['format'];
+
+        if (isset($info[$report]['chart_series']))
+            $report_data['chart_series'] = $info[$report]['chart_series'];
+
+        return $report_data;
+    }
+
+    /**
+     * Checks to see if report exists.
+     *
+     * @param string $report report name
+     *
+    /**
      * Initializes report information.
      *
      * The report definition in an app developer's report is slimmed
@@ -223,7 +261,7 @@ class Report_Engine extends Engine
             // - timeline charts are sorted by the time (column 0)
             // - normal x/y are sorted by y (column 1)
 
-            if (empty($info['sort_column']))
+            if (! isset($info['sort_column']))
                 $info['sort_column'] = (preg_match('/timeline/', $info['chart_type'])) ? 0 : 1;
 
             // Track URLs and Dashboards
