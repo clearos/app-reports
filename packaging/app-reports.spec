@@ -22,7 +22,7 @@ Requires: app-base-core
 Requires: app-base-core >= 1:1.4.2
 Requires: clearos-framework >= 6.4.2
 Requires: system-report-driver
-Requires: theme-default >= 6.4.2
+Requires: theme-default >= 6.4.3
 
 %description core
 The Base Reports app provides a set of standard report tools for the operating system.
