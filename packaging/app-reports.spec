@@ -1,7 +1,7 @@
 
 Name: app-reports
 Epoch: 1
-Version: 1.4.3
+Version: 1.4.4
 Release: 1%{dist}
 Summary: Base Reports
 License: GPLv3
@@ -19,10 +19,10 @@ Summary: Base Reports - Core
 License: LGPLv3
 Group: ClearOS/Libraries
 Requires: app-base-core
-Requires: app-base-core >= 1:1.4.2
-Requires: clearos-framework >= 6.4.2
+Requires: app-base-core >= 1:1.4.4
+Requires: clearos-framework >= 6.4.4
 Requires: system-report-driver
-Requires: theme-default >= 6.4.3
+Requires: theme-default >= 6.4.4
 
 %description core
 The Base Reports app provides a set of standard report tools for the operating system.

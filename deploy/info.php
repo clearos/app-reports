@@ -5,7 +5,7 @@
 /////////////////////////////////////////////////////////////////////////////
 
 $app['basename'] = 'reports';
-$app['version'] = '1.4.3';
+$app['version'] = '1.4.4';
 $app['release'] = '1';
 $app['vendor'] = 'ClearFoundation';
 $app['packager'] = 'ClearFoundation';
@@ -27,8 +27,8 @@ $app['menu_enabled'] = FALSE;
 /////////////////////////////////////////////////////////////////////////////
 
 $app['core_requires'] = array(
-    'app-base-core >= 1:1.4.2',
-    'clearos-framework >= 6.4.2',
+    'app-base-core >= 1:1.4.4',
+    'clearos-framework >= 6.4.4',
     'system-report-driver',
-    'theme-default >= 6.4.3',
+    'theme-default >= 6.4.4',
 );
