@@ -265,14 +265,15 @@ class Report_Engine extends Engine
                 $info['sort_column'] = (preg_match('/timeline/', $info['chart_type'])) ? 0 : 1;
 
             // Track URLs and Dashboards
-            if (! isset($info['is_detail']) || !$info['is_detail'])
+            if (! isset($info['is_detail']) || !$info['is_detail']) {
                 $urls['/app/' . $info['url']] = $info['title'];
 
-            $dashboards[$info['url']] = array(
-                'controller' =>  $info['app'] . '/' . $info['basename'],
-                'method' => 'dashboard',
-                'params' => $info['key_value']
-            );
+                $dashboards[$info['url']] = array(
+                    'controller' =>  $info['app'] . '/' . $info['basename'],
+                    'method' => 'dashboard',
+                    'params' => $info['key_value']
+                );
+            }
 
             $report_info[$report_name] = $info;
         }
