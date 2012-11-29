@@ -1,7 +1,7 @@
 
 Name: app-reports
 Epoch: 1
-Version: 1.4.4
+Version: 1.4.6
 Release: 1%{dist}
 Summary: Base Reports
 License: GPLv3
@@ -19,6 +19,10 @@ Summary: Base Reports - Core
 License: LGPLv3
 Group: ClearOS/Libraries
 Requires: app-base-core
+Requires: app-dashboard >= 1:1.4.5
+Requires: app-process-viewer >= 1:1.4.5
+Requires: app-log-viewer >= 1:1.4.5
+Requires: app-network-visualiser >= 1:1.4.5
 Requires: app-base-core >= 1:1.4.4
 Requires: clearos-framework >= 6.4.4
 Requires: system-report-driver
