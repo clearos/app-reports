@@ -160,7 +160,7 @@ class Report_Engine extends Engine
      * @return array report information
      */
 
-    public function _get_data_info($report)
+    protected function _get_data_info($report)
     {
         clearos_profile(__METHOD__, __LINE__);
 
@@ -179,11 +179,6 @@ class Report_Engine extends Engine
         return $report_data;
     }
 
-    /**
-     * Checks to see if report exists.
-     *
-     * @param string $report report name
-     *
     /**
      * Initializes report information.
      *
