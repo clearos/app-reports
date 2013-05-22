@@ -6,9 +6,9 @@
  * The report system use the factory methodology, but implemented in a
  * CodeIgniter frendly way.
  *
- * @category   Apps
- * @package    Reports
- * @subpackage Controllers
+ * @category   apps
+ * @package    reports
+ * @subpackage controllers
  * @author     ClearFoundation <developer@clearfoundation.com>
  * @copyright  2012 ClearFoundation
  * @license    http://www.gnu.org/copyleft/gpl.html GNU General Public License version 3 or later
