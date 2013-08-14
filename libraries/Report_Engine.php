@@ -176,6 +176,12 @@ class Report_Engine extends Engine
         if (isset($info[$report]['chart_series']))
             $report_data['chart_series'] = $info[$report]['chart_series'];
 
+        if (isset($info[$report]['series_sort']))
+            $report_data['series_sort'] = $info[$report]['series_sort'];
+
+        if (isset($info[$report]['series_highlight']))
+            $report_data['series_highlight'] = $info[$report]['series_highlight'];
+
         return $report_data;
     }
 
