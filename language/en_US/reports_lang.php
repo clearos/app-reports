@@ -3,8 +3,8 @@
 $lang['reports_app_description'] = 'The Base Reports app provides a set of standard report tools for the operating system.';
 $lang['reports_app_name'] = 'Base Reports';
 $lang['reports_date_range'] = 'Date Range';
-$lang['reports_device_types'] = 'Device Types';
 $lang['reports_device_type_summary'] = 'Device Type Summary';
+$lang['reports_device_types'] = 'Device Types';
 $lang['reports_entries'] = 'Entries';
 $lang['reports_full_report'] = 'Full Report';
 $lang['reports_ip_summary'] = 'IP Summary';
