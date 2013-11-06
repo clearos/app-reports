@@ -5,7 +5,7 @@
 /////////////////////////////////////////////////////////////////////////////
 
 $app['basename'] = 'reports';
-$app['version'] = '1.5.0';
+$app['version'] = '1.5.10';
 $app['release'] = '1';
 $app['vendor'] = 'ClearFoundation';
 $app['packager'] = 'ClearFoundation';
@@ -26,12 +26,7 @@ $app['menu_enabled'] = FALSE;
 // Packaging
 /////////////////////////////////////////////////////////////////////////////
 
-// FIXME: remove app-dashboard, app-log-viewer, app-process-viewer, app-network-visualiser requirements for or after 6.4 release
 $app['core_requires'] = array(
-    'app-dashboard >= 1:1.4.5',
-    'app-process-viewer >= 1:1.4.5',
-    'app-log-viewer >= 1:1.4.5',
-    'app-network-visualiser >= 1:1.4.5',
     'app-base-core >= 1:1.4.4',
     'clearos-framework >= 6.4.4',
     'system-report-driver',
