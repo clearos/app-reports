@@ -18,6 +18,7 @@ $lang['reports_report_settings'] = 'Rapportinställningar';
 $lang['reports_reports'] = 'Rapporter';
 $lang['reports_today'] = 'Idag';
 $lang['reports_top_device_types'] = 'Top Device Types';
+$lang['reports_top_external_ips'] = 'Top External IPs';
 $lang['reports_top_ips'] = 'Top IPs';
 $lang['reports_top_users'] = 'Top Users';
 $lang['reports_user_summary'] = 'User Summary';

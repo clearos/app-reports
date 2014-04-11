@@ -18,6 +18,7 @@ $lang['reports_report_settings'] = 'Report Settings';
 $lang['reports_reports'] = 'Reports';
 $lang['reports_today'] = 'Today';
 $lang['reports_top_device_types'] = 'Top Device Types';
+$lang['reports_top_external_ips'] = 'Top External IPs';
 $lang['reports_top_ips'] = 'Top IPs';
 $lang['reports_top_users'] = 'Top Users';
 $lang['reports_user_summary'] = 'User Summary';
