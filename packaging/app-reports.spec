@@ -1,7 +1,7 @@
 
 Name: app-reports
 Epoch: 1
-Version: 1.5.10
+Version: 1.6.5
 Release: 1%{dist}
 Summary: Base Reports
 License: GPLv3
@@ -68,13 +68,10 @@ exit 0
 %files
 %defattr(-,root,root)
 /usr/clearos/apps/reports/controllers
-/usr/clearos/apps/reports/htdocs
-/usr/clearos/apps/reports/views
 
 %files core
 %defattr(-,root,root)
 %exclude /usr/clearos/apps/reports/packaging
-%exclude /usr/clearos/apps/reports/tests
 %dir /usr/clearos/apps/reports
 /usr/clearos/apps/reports/deploy
 /usr/clearos/apps/reports/language
