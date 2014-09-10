@@ -30,5 +30,4 @@ $app['core_requires'] = array(
     'app-base-core >= 1:1.4.4',
     'clearos-framework >= 6.4.4',
     'system-report-driver',
-    'theme-default >= 6.4.4',
 );
