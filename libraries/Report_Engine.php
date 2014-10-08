@@ -173,6 +173,9 @@ class Report_Engine extends Engine
         if (isset($info[$report]['format']))
             $report_data['format'] = $info[$report]['format'];
 
+        if (isset($info[$report]['units']))
+            $report_data['units'] = $info[$report]['units'];
+
         if (isset($info[$report]['chart_series']))
             $report_data['chart_series'] = $info[$report]['chart_series'];
 
