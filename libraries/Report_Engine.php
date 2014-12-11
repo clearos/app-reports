@@ -78,6 +78,7 @@ class Report_Engine extends Engine
     // C O N S T A N T S
     ///////////////////////////////////////////////////////////////////////////////
 
+    const RANGE_LIVE = 'live';
     const RANGE_TODAY = 'today';
     const RANGE_YESTERDAY = 'yesterday';
     const RANGE_LAST_7_DAYS = 'last7';
