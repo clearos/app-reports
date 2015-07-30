@@ -12,6 +12,7 @@ $lang['reports_full_report'] = 'Полный отчет';
 $lang['reports_ip_summary'] = 'Сводка IP';
 $lang['reports_last_30_days'] = 'Последние 30 дней';
 $lang['reports_last_7_days'] = 'Последние 7 дней';
+$lang['reports_live'] = 'Live';
 $lang['reports_range_invalid'] = 'Диапазон является недействительным.';
 $lang['reports_report_data'] = 'Данные отчета';
 $lang['reports_report_settings'] = 'Настройки отчета';

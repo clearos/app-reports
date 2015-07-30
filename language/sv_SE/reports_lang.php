@@ -12,6 +12,7 @@ $lang['reports_full_report'] = 'Fullständig rapport';
 $lang['reports_ip_summary'] = 'IP Summary';
 $lang['reports_last_30_days'] = 'De senaste 30 dagarna';
 $lang['reports_last_7_days'] = 'De senaste 7 dagarna';
+$lang['reports_live'] = 'Live';
 $lang['reports_range_invalid'] = 'Intervallet är ogiltigt.';
 $lang['reports_report_data'] = 'Rapportdata';
 $lang['reports_report_settings'] = 'Rapportinställningar';

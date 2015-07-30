@@ -12,6 +12,7 @@ $lang['reports_full_report'] = 'Full Report';
 $lang['reports_ip_summary'] = 'IP Summary';
 $lang['reports_last_30_days'] = 'Last 30 Days';
 $lang['reports_last_7_days'] = 'Last 7 Days';
+$lang['reports_live'] = 'Live';
 $lang['reports_range_invalid'] = 'Range is invalid.';
 $lang['reports_report_data'] = 'Report Data';
 $lang['reports_report_settings'] = 'Report Settings';
