@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Reports engine controller.
+ * Reports controller.
  *
  * @category   apps
  * @package    reports
  * @subpackage controllers
  * @author     ClearFoundation <developer@clearfoundation.com>
- * @copyright  2012 ClearFoundation
+ * @copyright  2012-2018 ClearFoundation
  * @license    http://www.gnu.org/copyleft/gpl.html GNU General Public License version 3 or later
  * @link       http://www.clearfoundation.com/docs/developer/apps/reports/
  */
@@ -34,39 +34,27 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 /**
- * Reports engine controller.
+ * Reports controller.
  *
  * @category   apps
  * @package    reports
  * @subpackage controllers
  * @author     ClearFoundation <developer@clearfoundation.com>
- * @copyright  2012 ClearFoundation
+ * @copyright  2012-2018 ClearFoundation
  * @license    http://www.gnu.org/copyleft/gpl.html GNU General Public License version 3 or later
  * @link       http://www.clearfoundation.com/docs/developer/apps/reports/
  */
 
-class Report_Engine_Controller extends ClearOS_Controller
+class Reports extends ClearOS_Controller
 {
-    ///////////////////////////////////////////////////////////////////////////////
-    // V A R I A B L E S
-    ///////////////////////////////////////////////////////////////////////////////
-
-    protected $report_info = array();
-
-    ///////////////////////////////////////////////////////////////////////////////
-    // M E T H O D S
-    ///////////////////////////////////////////////////////////////////////////////
-
     /**
-     * Report engine controller constructor.
+     * Reports controller.
      *
-     * @param string $app     app name for the report
-     * @param string $library library for the report
+     * @return view
      */
 
-    function __construct($app, $library)
+    function index()
     {
-        $this->report_info['app'] = $app;
-        $this->report_info['library'] = $library;
+        // Nothing
     }
 }

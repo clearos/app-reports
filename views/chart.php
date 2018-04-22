@@ -1,14 +1,11 @@
 <?php
 
 /**
- * Report factory controller.
- *
- * ClearOS use to have a reports driver/factory methodology.  Some code
- * still remains in order to be backwards compatible.
+ * Chart view.
  *
  * @category   apps
  * @package    reports
- * @subpackage controllers
+ * @subpackage views
  * @author     ClearFoundation <developer@clearfoundation.com>
  * @copyright  2012-2018 ClearFoundation
  * @license    http://www.gnu.org/copyleft/gpl.html GNU General Public License version 3 or later
@@ -28,8 +25,19 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.  
 //
 ///////////////////////////////////////////////////////////////////////////////
 
-require_once clearos_app_base('reports') . '/controllers/report_controller.php';
+$unique_key = $report['app'] . '_' . $report['report'];
+
+echo chart_container($report['title'], "${unique_key}_chart", $options);
+
+echo "
+    <input type='hidden' id='clearos_report_${unique_key}_basename' value='$unique_key'>
+    <input type='hidden' id='${unique_key}_app_name' value='" . $report['app'] . "'>
+    <input type='hidden' id='${unique_key}_basename' value='" . $report['basename'] . "'>
+    <input type='hidden' id='${unique_key}_report_name' value='" . $report['report'] . "'>
+    <input type='hidden' id='${unique_key}_key_value' value='" . $report['key_value'] . "'>
+    <input type='hidden' id='${unique_key}_chart_type' value='" . $report['chart_type'] . "'>
+";

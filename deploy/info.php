@@ -5,8 +5,7 @@
 /////////////////////////////////////////////////////////////////////////////
 
 $app['basename'] = 'reports';
-$app['version'] = '2.1.6';
-$app['release'] = '1';
+$app['version'] = '2.5.0';
 $app['vendor'] = 'ClearFoundation';
 $app['packager'] = 'ClearFoundation';
 $app['license'] = 'GPLv3';
@@ -29,5 +28,18 @@ $app['menu_enabled'] = FALSE;
 $app['core_requires'] = array(
     'app-base-core >= 1:1.4.4',
     'clearos-framework >= 6.4.4',
+);
+
+$app['provides'] = array(
     'system-report-driver',
+);
+
+$app['core_obsoletes'] = array(
+    'app-home-reports-core',
+    'app-professional-reports-core',
+);
+
+$app['obsoletes'] = array(
+    'app-home-reports',
+    'app-professional-reports',
 );
